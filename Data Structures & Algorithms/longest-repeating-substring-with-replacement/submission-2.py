@@ -1,0 +1,13 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        mp = {}
+        maxf, l = 0, 0
+
+        for r in range(len(s)):
+            mp[s[r]] = 1 + mp.get(s[r], 0)
+            maxf = max(maxf, mp[s[r]])
+            # using while since l keeps updating
+            while (r - l + 1) - maxf > k:
+                mp[s[l]] -= 1
+                l += 1
+        return r - l + 1
